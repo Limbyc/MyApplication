@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+<!--    registration colors-->
+    <color name="text">#A9A9A9</color>
+    <color name="button">#C67C4E</color>
+    <color name="button_pressed">#CC9573</color>
 </resources>
