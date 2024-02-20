@@ -7,4 +7,8 @@
     <color name="text">#A9A9A9</color>
     <color name="button">#C67C4E</color>
     <color name="button_pressed">#CC9573</color>
+
+<!--    mainfragment colors-->
+    <color name="bg">#f9f9f9</color>
+    <color name="background">#2a2a2a</color>
 </resources>

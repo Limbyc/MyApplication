@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.valance.myapplication.databinding.MainFragmentBinding
 
+
 class MainFragment : Fragment() {
 
     private lateinit var binding: MainFragmentBinding

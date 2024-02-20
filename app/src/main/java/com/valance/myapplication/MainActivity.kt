@@ -5,11 +5,9 @@ import android.os.Bundle
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.valance.myapplication.databinding.ActivityMainBinding
-import com.valance.myapplication.ui.fragments.MainFragment
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
