@@ -1,4 +1,6 @@
 package com.valance.myapplication.ui.fragments
 
-class DetailFragment {
+import androidx.fragment.app.Fragment
+
+class DetailFragment: Fragment() {
 }

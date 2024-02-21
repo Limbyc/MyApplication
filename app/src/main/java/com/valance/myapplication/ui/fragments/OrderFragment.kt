@@ -1,4 +1,6 @@
 package com.valance.myapplication.ui.fragments
 
-class OrderFragment {
+import androidx.fragment.app.Fragment
+
+class OrderFragment: Fragment() {
 }

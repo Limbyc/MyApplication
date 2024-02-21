@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
-//    id("com.google.dagger.hilt.android")
+    id ("kotlin-android")
 }
 
 android {
@@ -52,7 +52,6 @@ dependencies {
     implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-ktx:$room_version") //для работы корутин
     annotationProcessor("androidx.room:room-compiler:$room_version")
-//    kapt("androidx.room:room-compiler:$room_version")
     testImplementation("androidx.room:room-testing:$room_version")
 
     //Coroutines
@@ -65,10 +64,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
 
-    //Hilt
-//    implementation("com.google.dagger:hilt-android:2.48.1")
-//    kapt("com.google.dagger:hilt-android-compiler:2.48.1")
-
     //ktx
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
@@ -78,5 +73,8 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    implementation ("com.ismaeldivita.chipnavigation:chip-navigation-bar:1.3.4")
+
 }
 

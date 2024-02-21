@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/home"
+        app:cnb_iconColor="#C67C4E"
+        app:cnb_backgroundColor= "@color/white"
+        android:title="" />
+    <item
+        android:title=""
+        android:id="@+id/heart"
+        android:icon="@drawable/heart"
+        app:cnb_iconColor="#C67C4E"
+        app:cnb_backgroundColor= "@color/white"/>
+    <item
+        android:title=""
+        android:id="@+id/bag"
+        android:icon="@drawable/bag_3"
+        app:cnb_iconColor="#C67C4E"
+        app:cnb_backgroundColor= "@color/white"/>
+    <item
+        android:title=""
+        android:id="@+id/notification"
+        android:icon="@drawable/notification"
+        app:cnb_iconColor="#C67C4E"
+        app:cnb_backgroundColor= "@color/white"/>
+</menu>
