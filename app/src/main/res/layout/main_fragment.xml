@@ -12,6 +12,19 @@
         android:layout_height="0dp"
         android:background="@color/background"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageView"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="19dp"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -19,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.26"/>
+        app:layout_constraintGuide_end="612dp" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/appCompatImageView2"
@@ -30,7 +43,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
-
 
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -62,5 +74,51 @@
         tools:layout_editor_absoluteX="0dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/appCompatImageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <EditText
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="24dp"
+            android:autofillHints=""
+            android:background="@drawable/search_view"
+            android:drawableLeft="@drawable/search"
+            android:drawablePadding="16dp"
+            android:fontFamily="@font/sora_regular"
+            android:hint="@string/search_coffee"
+            android:inputType=""
+            android:padding="16dp"
+            android:textColor="@color/text"
+            android:textColorHint="@color/search_view_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/filter_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="34dp"
+            android:background="@drawable/filter_button"
+            android:clickable="true"
+            android:padding="16dp"
+            android:src="@drawable/filter"
+            app:layout_constraintBottom_toBottomOf="@id/search_bar"
+            app:layout_constraintTop_toTopOf="@id/search_bar" />
+
+    </FrameLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

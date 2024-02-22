@@ -27,50 +27,26 @@ class MainActivity : AppCompatActivity() {
             } else {
                 binding.bottomNav.visibility = View.VISIBLE
             }
+
         }
     binding.bottomNav.setOnItemSelectedListener {
         when(it){
             R.id.home -> {
-                navigateToMainFragment()
-                true
+                navController.navigate(R.id.mainFragment)
             }
             R.id.heart -> {
-                navigateToDetailFragment()
-                true
+                navController.navigate(R.id.detailFragment)
             }
             R.id.bag -> {
-                navigateToOrderFragment()
-                true
+                navController.navigate(R.id.orderFragment)
             }
             R.id.notification -> {
 //                navigateToNotificationFragment()
-                true
             }
             else -> false
             }
         }
     }
-
-
-    private fun navigateToMainFragment() {
-        val navController = findNavController(R.id.my_nav_host_fragment)
-        navController.navigate(R.id.action_startingFragment_to_mainFragment)
-    }
-
-    private fun navigateToDetailFragment() {
-        val navController = findNavController(R.id.my_nav_host_fragment)
-        navController.navigate(R.id.action_mainFragment_to_detailFragment)
-    }
-
-    private fun navigateToOrderFragment() {
-        val navController = findNavController(R.id.my_nav_host_fragment)
-        navController.navigate(R.id.action_mainFragment_to_orderFragment)
-    }
-
-//    private fun navigateToNotificationFragment() {
-//        val navController = findNavController(R.id.my_nav_host_fragment)
-//        navController.navigate(R.id.action_mainFragment_to_notificationFragment)
-//    }
     private fun hideSystemUI() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         WindowInsetsControllerCompat(window, binding.root).let { controller ->
