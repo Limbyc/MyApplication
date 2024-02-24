@@ -10,4 +10,5 @@
     android:fontFamily="@font/sora_regular"
     android:textSize="14sp"
     android:gravity="center"
-    android:padding="8dp" />
+    android:padding="8dp"
+    android:layout_marginEnd="8dp"/>

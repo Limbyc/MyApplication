@@ -14,4 +14,5 @@
     <color name="search_view">#313131</color>
     <color name="search_view_text">#989898</color>
     <color name="text_mainfragment">#2F4B4E</color>
+    <color name="text_location">#DDDDDD</color>
 </resources>
