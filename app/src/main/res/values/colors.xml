@@ -19,4 +19,8 @@
     <color name="text_description">#9B9B9B</color>
     <color name="cost">#2F4B4E</color>
 
+<!--    detail color-->
+    <color name="name_fragment">#2F2D2C</color>
+    <color name="description">#9B9B9B</color>
+    <color name="square">#F9F9F9</color>
 </resources>

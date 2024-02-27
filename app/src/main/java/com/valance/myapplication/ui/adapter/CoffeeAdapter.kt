@@ -1,6 +1,7 @@
 package com.valance.myapplication.ui.adapter
 
 import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,7 @@ import com.valance.myapplication.R
 import com.valance.myapplication.ui.data.Coffee
 import com.valance.myapplication.utils.ImageUtils
 
-class CoffeeAdapter(private val productList: List<Coffee>) :
+class CoffeeAdapter(private var productList: List<Coffee>) :
     RecyclerView.Adapter<CoffeeAdapter.ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -22,11 +23,17 @@ class CoffeeAdapter(private val productList: List<Coffee>) :
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = productList[position]
-        holder.bind(product)
+        holder.bind(product, position)
     }
 
     override fun getItemCount(): Int {
         return productList.size
+    }
+
+    // Добавьте метод для обновления списка
+    fun updateList(newList: List<Coffee>) {
+        productList = newList
+        notifyDataSetChanged()
     }
 
     inner class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -36,7 +43,7 @@ class CoffeeAdapter(private val productList: List<Coffee>) :
         private val textViewPrice: TextView = itemView.findViewById(R.id.cost)
         private val rating: TextView = itemView.findViewById(R.id.rating)
 
-        fun bind(product: Coffee) {
+        fun bind(product: Coffee, position: Int) {
             textViewName.text = product.name
             textViewDescription.text = product.description
             textViewPrice.text = "$ ${product.price}"
@@ -48,8 +55,12 @@ class CoffeeAdapter(private val productList: List<Coffee>) :
             if (originalBitmap != null && maskDrawable != null) {
                 val roundedBitmap = ImageUtils.applyRoundedCornerMask(originalBitmap, maskDrawable)
                 imageViewProduct.setImageBitmap(roundedBitmap)
+            } else {
+                Log.e("CoffeeAdapter", "Failed to load image for position: $position")
             }
         }
 
     }
 }
+
+

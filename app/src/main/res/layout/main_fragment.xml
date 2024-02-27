@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="612dp" />
+        app:layout_constraintGuide_percent="0.3131313" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/appCompatImageView2"
@@ -69,6 +69,7 @@
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4" />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -79,34 +80,52 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicatorColor="@null"
-        app:tabIndicatorAnimationMode="elastic"
-        app:tabRippleColor="@null"
-        app:tabIndicator="@drawable/coffee_types"
+        android:layout_marginTop="24dp"
         android:background="@color/bg"
         app:layout_constraintTop_toBottomOf="@+id/appCompatImageView2"
+        app:tabIndicator="@drawable/coffee_types"
+        app:tabIndicatorAnimationMode="elastic"
+        app:tabIndicatorColor="@null"
         app:tabMode="scrollable"
+        android:layout_marginStart="30dp"
+        app:tabPaddingEnd="8dp"
+        app:tabPaddingStart="8dp"
+        app:tabRippleColor="@null"
         app:tabSelectedTextColor="@color/text_mainfragment"
         app:tabTextColor="@color/text_mainfragment"
-        app:tabPaddingStart="8dp"
-        app:tabPaddingEnd="8dp" />
+        tools:layout_editor_absoluteX="30dp" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="400dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCoffee"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_height="0dp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="30dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+        app:layout_constraintTop_toBottomOf="@+id/guideline3"
+        app:layout_constraintVertical_bias="0.0"
+        app:spanCount="2"
         tools:listitem="@layout/coffee_recycler_view_element" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.89" />
 
     <FrameLayout
         android:id="@+id/frameLayout"

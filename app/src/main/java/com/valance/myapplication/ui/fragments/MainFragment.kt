@@ -3,6 +3,7 @@ package com.valance.myapplication.ui.fragments
 import ItemOffsetDecoration
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,12 +19,14 @@ import com.valance.myapplication.R
 import com.valance.myapplication.databinding.MainFragmentBinding
 import com.valance.myapplication.ui.adapter.CoffeeAdapter
 import com.valance.myapplication.ui.data.Coffee
+import com.valance.myapplication.ui.data.CoffeeData
 import com.valance.myapplication.utils.ImageUtils
 class MainFragment : Fragment() {
 
     private lateinit var binding: MainFragmentBinding
     private var tabLayout: TabLayout? = null
-
+    private lateinit var adapter: CoffeeAdapter
+    private var originalList: List<Coffee> = emptyList()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,32 +39,28 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val productList = CoffeeData.productList
+        originalList = productList
+
+        val shuffledList = productList.shuffled()
         val recyclerView: RecyclerView = binding.recyclerViewCoffee
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+
+        adapter = CoffeeAdapter(shuffledList)
+        recyclerView.adapter = adapter
 
         val offset = resources.getDimensionPixelOffset(R.dimen.item_offset)
         recyclerView.addItemDecoration(ItemOffsetDecoration(offset))
 
-        val productList = listOf(
-            Coffee(4.8, "Cappucino", "with Chocolate", 4.53, R.drawable.coffee1),
-            Coffee(4.9, "Cappucino", "with Oat Milk", 3.90, R.drawable.coffee2),
-            Coffee(4.5, "Cappucino", "with Oat Milk", 4.50, R.drawable.coffee3),
-            Coffee(4.0, "Cappucino", "with Chocolate", 4.20, R.drawable.coffee4)
-        )
-
-        recyclerView.adapter = CoffeeAdapter(productList)
-
 
         tabLayout = binding.tabLayout
         val coffeeTypes = listOf("Cappuccino", "Machiato", "Latte", "Americano", "Espresso")
-        tabLayout?.selectTab(tabLayout?.getTabAt(0))
-
-        tabLayout?.addOnTabSelectedListener(createTabListener())
 
         for (coffeeType in coffeeTypes) {
             val tab = tabLayout?.newTab()
             val customTabView = createTabView(coffeeType)
             tab?.customView = customTabView
+            tab?.tag = coffeeType
             tabLayout?.addTab(tab!!)
         }
 
@@ -85,16 +84,36 @@ class MainFragment : Fragment() {
 
     private fun createTabListener(): TabLayout.OnTabSelectedListener {
         return object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                Log.d("MainFragment", "onTabSelected called")
+                val selectedCoffeeType: String? = tab.tag as? String
+                selectedCoffeeType?.let { text ->
+                    Log.d("MainFragment", "Selected coffee type: $text")
+                    filterAndDisplayCoffee(text)
+                }
                 updateTabAppearance(tab, R.color.white, R.drawable.coffee_types, R.font.sora_semibold)
             }
+
+
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                 updateTabAppearance(tab, R.color.text_mainfragment, R.drawable.type_of_coffee, R.font.sora_regular)
             }
-            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            override fun onTabReselected(tab: TabLayout.Tab) {
                 onTabSelected(tab)
             }
         }
+    }
+    private fun filterAndDisplayCoffee(coffeeType: String) {
+        Log.d("MainFragment", "Filtering by type: $coffeeType")
+
+        val filteredList = originalList.filter { it.type == coffeeType }
+        val sortedList = filteredList + (originalList - filteredList.toSet())
+
+        Log.d("MainFragment", "Filtered list size: ${filteredList.size}")
+        Log.d("MainFragment", "Sorted list size: ${sortedList.size}")
+
+        adapter.updateList(sortedList)
     }
 
     private fun updateTabAppearance(tab: TabLayout.Tab?, textColorResId: Int, backgroundDrawableResId: Int, fontResourceId: Int) {

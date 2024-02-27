@@ -6,9 +6,10 @@ import android.view.View
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.valance.myapplication.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -29,24 +30,39 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-    binding.bottomNav.setOnItemSelectedListener {
-        when(it){
-            R.id.home -> {
-                navController.navigate(R.id.mainFragment)
-            }
-            R.id.heart -> {
-                navController.navigate(R.id.detailFragment)
-            }
-            R.id.bag -> {
-                navController.navigate(R.id.orderFragment)
-            }
-            R.id.notification -> {
-//                navigateToNotificationFragment()
-            }
-            else -> false
+
+        binding.bottomNav.setItemSelected(R.id.home)
+        binding.bottomNav.setOnItemSelectedListener {
+            when (it) {
+                R.id.home -> {
+                    if (navController.currentDestination?.id != R.id.mainFragment) {
+                        navController.navigate(R.id.mainFragment)
+                    }
+                }
+
+                R.id.heart -> {
+                    if (navController.currentDestination?.id != R.id.detailFragment) {
+                        navController.navigate(R.id.detailFragment)
+                    }
+                }
+
+                R.id.bag -> {
+                    if (navController.currentDestination?.id != R.id.orderFragment) {
+                        navController.navigate(R.id.orderFragment)
+                    }
+                }
+
+                R.id.notification -> {
+                    // navigateToNotificationFragment()
+                }
+
+                else -> false
             }
         }
+
     }
+
+
     private fun hideSystemUI() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         WindowInsetsControllerCompat(window, binding.root).let { controller ->

@@ -5,5 +5,6 @@ data class Coffee(
     val name: String,
     val description: String,
     val price: Double,
-    val imageResourceId: Int
+    val imageResourceId: Int,
+    val type: String
 )
