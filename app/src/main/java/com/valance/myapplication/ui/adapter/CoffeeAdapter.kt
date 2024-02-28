@@ -1,5 +1,6 @@
 package com.valance.myapplication.ui.adapter
 
+import Coffee
 import android.graphics.BitmapFactory
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,11 +11,12 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.valance.myapplication.R
-import com.valance.myapplication.ui.data.Coffee
 import com.valance.myapplication.utils.ImageUtils
 
-class CoffeeAdapter(private var productList: List<Coffee>) :
-    RecyclerView.Adapter<CoffeeAdapter.ProductViewHolder>() {
+class CoffeeAdapter(
+    private var productList: List<Coffee>,
+    private val onItemClick: (coffee: Coffee) -> Unit
+) : RecyclerView.Adapter<CoffeeAdapter.ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.coffee_recycler_view_element, parent, false)
@@ -23,7 +25,11 @@ class CoffeeAdapter(private var productList: List<Coffee>) :
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = productList[position]
-        holder.bind(product, position)
+        holder.bind(product)
+
+        holder.itemView.findViewById<View>(R.id.add_coffee).setOnClickListener {
+            onItemClick.invoke(product)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -43,7 +49,7 @@ class CoffeeAdapter(private var productList: List<Coffee>) :
         private val textViewPrice: TextView = itemView.findViewById(R.id.cost)
         private val rating: TextView = itemView.findViewById(R.id.rating)
 
-        fun bind(product: Coffee, position: Int) {
+        fun bind(product: Coffee) {
             textViewName.text = product.name
             textViewDescription.text = product.description
             textViewPrice.text = "$ ${product.price}"
@@ -59,8 +65,8 @@ class CoffeeAdapter(private var productList: List<Coffee>) :
                 Log.e("CoffeeAdapter", "Failed to load image for position: $position")
             }
         }
-
     }
 }
+
 
 

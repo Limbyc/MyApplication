@@ -76,5 +76,8 @@ dependencies {
 
     implementation ("com.ismaeldivita.chipnavigation:chip-navigation-bar:1.3.4")
 
+
+
+
 }
 

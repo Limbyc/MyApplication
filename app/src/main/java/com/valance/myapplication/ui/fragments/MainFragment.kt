@@ -1,5 +1,6 @@
 package com.valance.myapplication.ui.fragments
 
+import Coffee
 import ItemOffsetDecoration
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -11,14 +12,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import com.valance.myapplication.R
 import com.valance.myapplication.databinding.MainFragmentBinding
 import com.valance.myapplication.ui.adapter.CoffeeAdapter
-import com.valance.myapplication.ui.data.Coffee
 import com.valance.myapplication.ui.data.CoffeeData
 import com.valance.myapplication.utils.ImageUtils
 class MainFragment : Fragment() {
@@ -27,6 +29,7 @@ class MainFragment : Fragment() {
     private var tabLayout: TabLayout? = null
     private lateinit var adapter: CoffeeAdapter
     private var originalList: List<Coffee> = emptyList()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,7 +49,19 @@ class MainFragment : Fragment() {
         val recyclerView: RecyclerView = binding.recyclerViewCoffee
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
-        adapter = CoffeeAdapter(shuffledList)
+        adapter = CoffeeAdapter(shuffledList) { selectedCoffee ->
+            val coffeeId = selectedCoffee.id
+
+            val bundle = Bundle().apply {
+                putInt("selectedCoffeeId", coffeeId)
+                putInt("selectedCoffeeImageResId", selectedCoffee.imageResourceId)
+            }
+
+            findNavController().navigate(
+                R.id.detailFragment,
+                bundle
+            )
+        }
         recyclerView.adapter = adapter
 
         val offset = resources.getDimensionPixelOffset(R.dimen.item_offset)

@@ -9,4 +9,7 @@
     <string name="search_coffee">Search coffee</string>
     <string name="bilzen_tanjungbalai">Bilzen, Tanjungbalai</string>
     <string name="detail">Detail</string>
+    <string name="description">Description</string>
+    <string name="price">Price</string>
+    <string name="buy_now">Buy Now</string>
 </resources>

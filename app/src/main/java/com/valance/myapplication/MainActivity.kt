@@ -23,12 +23,14 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.startingFragment) {
-                binding.bottomNav.visibility = View.GONE
-            } else {
-                binding.bottomNav.visibility = View.VISIBLE
+            when (destination.id) {
+                R.id.startingFragment, R.id.detailFragment -> {
+                    binding.bottomNav.visibility = View.GONE
+                }
+                else -> {
+                    binding.bottomNav.visibility = View.VISIBLE
+                }
             }
-
         }
 
         binding.bottomNav.setItemSelected(R.id.home)
@@ -41,9 +43,9 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.heart -> {
-                    if (navController.currentDestination?.id != R.id.detailFragment) {
-                        navController.navigate(R.id.detailFragment)
-                    }
+//                    if (navController.currentDestination?.id != R.id.detailFragment) {
+//                        navController.navigate(R.id.detailFragment)
+//                    }
                 }
 
                 R.id.bag -> {

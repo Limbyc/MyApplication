@@ -22,5 +22,11 @@
 <!--    detail color-->
     <color name="name_fragment">#2F2D2C</color>
     <color name="description">#9B9B9B</color>
-    <color name="square">#F9F9F9</color>
+    <color name="square">#ededed</color>
+    <color name="rating">#2F2D2C</color>
+    <color name="count">#808080</color>
+    <color name="line">#EAEAEA</color>
+    <color name="description_text">#2F2D2C</color>
+    <color name="text_detail">#9B9B9B</color>
+    <color name="price_detail">#C67C4E</color>
 </resources>
