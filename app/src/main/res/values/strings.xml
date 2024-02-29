@@ -12,4 +12,6 @@
     <string name="description">Description</string>
     <string name="price">Price</string>
     <string name="buy_now">Buy Now</string>
+    <string name="read_more_text">A cappuccino is an approximately 150 ml (5 oz) beverage, with 25 ml of espresso coffee and 85ml of fresh milk the fo.. Read More</string>
+    <string name="additional_text">"A cappuccino is an approximately 150 ml (5 oz) beverage, with 25 ml of espresso coffee and 85 ml of fresh milk. The foamy milk on top, often decorated with a sprinkle of cocoa powder or cinnamon, gives cappuccino its distinctive appearance and rich flavor."</string>
 </resources>

@@ -9,7 +9,8 @@ data class Coffee(
     val price: Double,
     val imageResourceId: Int,
     val category: String,
-    val id: Int
+    val id: Int,
+    val count: Int
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
@@ -19,6 +20,7 @@ data class Coffee(
         parcel.readDouble(),
         parcel.readInt(),
         parcel.readString() ?: "",
+        parcel.readInt(),
         parcel.readInt()
     )
 
