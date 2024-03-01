@@ -12,7 +12,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -56,7 +55,15 @@ class MainFragment : Fragment() {
                 putInt("selectedCoffeeId", coffeeId)
                 putInt("selectedCoffeeImageResId", selectedCoffee.imageResourceId)
             }
+            val bundle_likes = Bundle().apply {
+                putInt("selectedCoffeeId", coffeeId)
+                putInt("selectedCoffeeImageResId", selectedCoffee.imageResourceId)
+            }
 
+            findNavController().navigate(
+                R.id.likeFragment,
+                bundle_likes
+            )
             findNavController().navigate(
                 R.id.detailFragment,
                 bundle

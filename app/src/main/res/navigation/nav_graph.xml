@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_mainFragment_to_orderFragment"
             app:destination="@id/orderFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_likeFragment"
+            app:destination="@id/likeFragment" />
     </fragment>
     <fragment
         android:id="@+id/startingFragment"
@@ -35,4 +38,9 @@
         android:name="com.valance.myapplication.ui.fragments.DetailFragment"
         android:label="detail_fragment"
         tools:layout="@layout/detail_fragment"/>
+    <fragment
+        android:id="@+id/likeFragment"
+        android:name="com.valance.myapplication.ui.fragments.LikeFragment"
+        android:label="LikeFragment"
+        tools:layout="@layout/like_fragment"/>
 </navigation>

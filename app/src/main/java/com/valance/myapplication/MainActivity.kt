@@ -43,9 +43,9 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.heart -> {
-//                    if (navController.currentDestination?.id != R.id.detailFragment) {
-//                        navController.navigate(R.id.detailFragment)
-//                    }
+                    if (navController.currentDestination?.id != R.id.likeFragment) {
+                        navController.navigate(R.id.likeFragment)
+                    }
                 }
 
                 R.id.bag -> {

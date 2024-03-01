@@ -1,6 +1,7 @@
 package com.valance.myapplication.ui.fragments
 
 import Coffee
+import LickedSharedPreferences
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,9 +25,9 @@ import com.valance.myapplication.ui.data.CoffeeData
 
 class DetailFragment : Fragment() {
 
-    lateinit var binding: DetailFragmentBinding
+    private lateinit var binding: DetailFragmentBinding
     private var tabLayout: TabLayout? = null
-
+    private lateinit var lickedSharedPreferences: LickedSharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,9 +35,8 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DetailFragmentBinding.inflate(inflater, container, false)
-
         val coffeeId: Int? = arguments?.getInt("selectedCoffeeId")
-        coffeeId?.let {
+        coffeeId?.let { it ->
             val selectedCoffee: Coffee? = CoffeeData.getCoffeeById(it)
             selectedCoffee?.let {
                 binding.nameCoffee.text = it.name
@@ -43,14 +44,34 @@ class DetailFragment : Fragment() {
                 binding.description.text = it.description
                 binding.price.text = "$ ${it.price}"
                 binding.count.text = "(${it.count})"
-
                 binding.imageCoffee1.setImageResource(it.imageResourceId)
+
+                binding.like.setOnClickListener {
+                    val coffeeId: Int? = arguments?.getInt("selectedCoffeeId")
+                    coffeeId?.let {
+                        val itemId = it.toString()
+                        val isLiked = lickedSharedPreferences.isLiked(itemId)
+                        if (!isLiked) {
+                            lickedSharedPreferences.setLiked(itemId, true)
+                            saveLikedCoffeeId(itemId)
+                            Log.d("aa", itemId)
+                        } else {
+                            lickedSharedPreferences.setLiked(itemId, false)
+                            removeLikedCoffeeId(itemId)
+                            Log.d("bb", itemId)
+                        }
+                        updateUI()
+                    }
+                }
+
             }
         }
-
         val textView = binding.appCompatTextView6
         textView.setOnClickListener { onReadMoreClick(textView) }
         setStyledText(textView, R.string.read_more_text)
+
+        lickedSharedPreferences = LickedSharedPreferences(requireContext())
+        updateUI()
 
         return binding.root
     }
@@ -75,14 +96,26 @@ class DetailFragment : Fragment() {
             findNavController().navigate(R.id.mainFragment)
         }
 
-
     }
 
+    //like
+    private fun updateUI() {
+        val coffeeId: Int? = arguments?.getInt("selectedCoffeeId")
+        coffeeId?.let {
+            val itemId = it.toString()
+            val isLiked = lickedSharedPreferences.isLiked(itemId)
+            val like = binding.like
+            like.setImageResource(if (isLiked) R.drawable.heart_licked else R.drawable.like)
+        }
+    }
+
+    //size_type
     private fun createTabView(text: String): View {
         val customTabView = LayoutInflater.from(context).inflate(R.layout.size_coffee, null) as TextView
         customTabView.text = text
         return customTabView
     }
+    //description text
     private fun setStyledText(textView: TextView, stringResourceId: Int) {
         val context: Context = requireContext()
 
@@ -97,13 +130,13 @@ class DetailFragment : Fragment() {
 
         textView.text = spannableString
     }
-
+    //add more text
     private fun onReadMoreClick(view: View) {
         val textView = view as TextView
         textView.maxLines = Integer.MAX_VALUE
         textView.setText(R.string.additional_text)
     }
-
+    // tabLayout listener
     private fun createTabListener(): TabLayout.OnTabSelectedListener {
         return object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -112,23 +145,33 @@ class DetailFragment : Fragment() {
                 }
                 updateTabAppearance(tab, R.color.price_detail, R.drawable.size_coffee_press, R.font.sora_regular)
             }
-
-
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                 updateTabAppearance(tab, R.color.black, R.drawable.size_coffee_bg, R.font.sora_regular)
             }
-
             override fun onTabReselected(tab: TabLayout.Tab) {
                 onTabSelected(tab)
             }
         }
     }
-
+    // tabLayout update
     private fun updateTabAppearance(tab: TabLayout.Tab?, textColorResId: Int, backgroundDrawableResId: Int, fontResourceId: Int) {
         val customTabView = tab?.customView as? TextView
         customTabView?.setTextColor(ContextCompat.getColor(requireContext(), textColorResId))
         customTabView?.background = ContextCompat.getDrawable(requireContext(), backgroundDrawableResId)
         customTabView?.typeface = ResourcesCompat.getFont(requireContext(), fontResourceId)
+    }
+
+    private fun saveLikedCoffeeId(coffeeId: String) {
+        val likedCoffeeIds = lickedSharedPreferences.getLikedCoffeeIds().toMutableSet()
+        likedCoffeeIds.add(coffeeId)
+        lickedSharedPreferences.saveLikedCoffeeIds(likedCoffeeIds)
+    }
+
+    // Метод для удаления ID лайкнутого кофе из SharedPreferences
+    private fun removeLikedCoffeeId(coffeeId: String) {
+        val likedCoffeeIds = lickedSharedPreferences.getLikedCoffeeIds().toMutableSet()
+        likedCoffeeIds.remove(coffeeId)
+        lickedSharedPreferences.saveLikedCoffeeIds(likedCoffeeIds)
     }
 }
 

@@ -14,7 +14,7 @@ import com.valance.myapplication.R
 import com.valance.myapplication.utils.ImageUtils
 
 class CoffeeAdapter(
-    private var productList: List<Coffee>,
+    private var productList: List<Coffee?>,
     private val onItemClick: (coffee: Coffee) -> Unit
 ) : RecyclerView.Adapter<CoffeeAdapter.ProductViewHolder>() {
 
@@ -25,10 +25,14 @@ class CoffeeAdapter(
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = productList[position]
-        holder.bind(product)
+        if (product != null) {
+            holder.bind(product)
+        }
 
         holder.itemView.findViewById<View>(R.id.add_coffee).setOnClickListener {
-            onItemClick.invoke(product)
+            if (product != null) {
+                onItemClick.invoke(product)
+            }
         }
     }
 
