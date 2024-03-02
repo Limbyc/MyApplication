@@ -32,13 +32,11 @@ class LikeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE)
         val likedCoffeeIds = LickedSharedPreferences(requireContext()).getLikedCoffeeIds()
 
         if (likedCoffeeIds.isNotEmpty()) {
             binding.recyclerViewCoffee.visibility = View.VISIBLE
             binding.UDontHaveLikes.visibility = View.GONE
-            val itemList = CoffeeData.productList
             val likedCoffeeList = likedCoffeeIds.mapNotNull { it.toIntOrNull()
                 ?.let { it1 -> CoffeeData.getCoffeeById(it1) } }
 
