@@ -22,4 +22,6 @@
     <string name="edit_address">Edit Address</string>
     <string name="order">Order</string>
     <string name="add_note">Add Note</string>
+    <string name="_1_discount_is_applied">1 Discount is applied</string>
+    <string name="payment_summary">Payment Summary</string>
 </resources>
