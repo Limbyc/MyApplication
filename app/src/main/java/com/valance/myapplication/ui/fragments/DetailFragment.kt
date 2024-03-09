@@ -95,7 +95,9 @@ class DetailFragment : Fragment() {
         binding.appCompatImageView4.setOnClickListener{
             findNavController().navigate(R.id.mainFragment)
         }
-
+        binding.buyButton.setOnClickListener{
+            findNavController().navigate(R.id.orderFragment)
+        }
     }
 
     //like

@@ -248,6 +248,7 @@
             android:textColor="@color/price_detail"/>
 
         <TextView
+            android:id="@+id/buyButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
