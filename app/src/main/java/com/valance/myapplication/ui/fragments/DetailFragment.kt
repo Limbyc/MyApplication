@@ -17,10 +17,12 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.valance.myapplication.R
 import com.valance.myapplication.databinding.DetailFragmentBinding
+import com.valance.myapplication.ui.ViewModel.SharedViewModel
 import com.valance.myapplication.ui.data.CoffeeData
 
 class DetailFragment : Fragment() {
@@ -28,6 +30,7 @@ class DetailFragment : Fragment() {
     private lateinit var binding: DetailFragmentBinding
     private var tabLayout: TabLayout? = null
     private lateinit var lickedSharedPreferences: LickedSharedPreferences
+    private val sharedViewModel by activityViewModels<SharedViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,9 +38,10 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DetailFragmentBinding.inflate(inflater, container, false)
-        val coffeeId: Int? = arguments?.getInt("selectedCoffeeId")
+        val coffeeId: Int? = sharedViewModel.selectedCoffeeId
         coffeeId?.let { it ->
             val selectedCoffee: Coffee? = CoffeeData.getCoffeeById(it)
+            Log.d("aaaaaaaaaaaaaaaaaaaa",selectedCoffee.toString() )
             selectedCoffee?.let {
                 binding.nameCoffee.text = it.name
                 binding.rating.text = "${it.rating}"
@@ -47,7 +51,7 @@ class DetailFragment : Fragment() {
                 binding.imageCoffee1.setImageResource(it.imageResourceId)
 
                 binding.like.setOnClickListener {
-                    val coffeeId: Int? = arguments?.getInt("selectedCoffeeId")
+                    val coffeeId: Int? = sharedViewModel.selectedCoffeeId
                     coffeeId?.let {
                         val itemId = it.toString()
                         val isLiked = lickedSharedPreferences.isLiked(itemId)

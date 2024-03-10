@@ -169,7 +169,8 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/coffeePhoto"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
     </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -186,6 +187,7 @@
         app:layout_constraintTop_toBottomOf="@+id/materialDivider2" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -348,6 +350,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cost" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/zacurknutyText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/sora_regular"
@@ -387,8 +390,8 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/totalPayment"
-        android:layout_width="1dp"
-        android:layout_height="17dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/sora_semibold"
         android:textColor="#2F2D2C"
         android:textSize="14sp"
@@ -399,6 +402,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/relativeLayout4"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/buy_product"
@@ -445,12 +449,12 @@
             android:textSize="16sp" />
 
         <RelativeLayout
-            android:layout_marginBottom="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/orderButton"
             android:layout_alignParentTop="true"
             android:layout_marginStart="12dp"
+            android:layout_marginBottom="12dp"
             android:layout_toEndOf="@+id/moneys">
 
             <androidx.appcompat.widget.AppCompatTextView

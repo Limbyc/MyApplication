@@ -13,12 +13,14 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import com.valance.myapplication.R
 import com.valance.myapplication.databinding.MainFragmentBinding
+import com.valance.myapplication.ui.ViewModel.SharedViewModel
 import com.valance.myapplication.ui.adapter.CoffeeAdapter
 import com.valance.myapplication.ui.data.CoffeeData
 import com.valance.myapplication.utils.ImageUtils
@@ -28,6 +30,7 @@ class MainFragment : Fragment() {
     private var tabLayout: TabLayout? = null
     private lateinit var adapter: CoffeeAdapter
     private var originalList: List<Coffee> = emptyList()
+    private val sharedViewModel by activityViewModels<SharedViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,25 +53,17 @@ class MainFragment : Fragment() {
 
         adapter = CoffeeAdapter(shuffledList) { selectedCoffee ->
             val coffeeId = selectedCoffee.id
+            val imageResId = selectedCoffee.imageResourceId
 
-            val bundle = Bundle().apply {
-                putInt("selectedCoffeeId", coffeeId)
-                putInt("selectedCoffeeImageResId", selectedCoffee.imageResourceId)
-            }
-            val bundle_likes = Bundle().apply {
-                putInt("selectedCoffeeId", coffeeId)
-                putInt("selectedCoffeeImageResId", selectedCoffee.imageResourceId)
-            }
+            sharedViewModel.selectedCoffeeId = coffeeId
+            sharedViewModel.selectedCoffeeImageResId = imageResId
 
-            findNavController().navigate(
-                R.id.likeFragment,
-                bundle_likes
-            )
-            findNavController().navigate(
-                R.id.detailFragment,
-                bundle
-            )
+            findNavController().apply {
+                navigate(R.id.likeFragment)
+                navigate(R.id.detailFragment)
+            }
         }
+
         recyclerView.adapter = adapter
 
         val offset = resources.getDimensionPixelOffset(R.dimen.item_offset)
