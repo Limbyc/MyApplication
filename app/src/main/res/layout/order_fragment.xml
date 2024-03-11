@@ -28,6 +28,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="734dp" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout2"
         android:layout_width="match_parent"
@@ -37,10 +44,10 @@
         android:layout_marginEnd="30dp"
         android:background="@drawable/order_types"
         android:scrollbars="none"
-        app:tabIndicator="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView9"
+        app:tabIndicator="@null"
         app:tabIndicatorAnimationMode="elastic"
         app:tabIndicatorColor="@null"
         app:tabMode="fixed"
@@ -48,7 +55,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView10"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="24dp"
@@ -57,11 +64,11 @@
         android:textColor="@color/delivery_address"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline6" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView11"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="16dp"
@@ -70,13 +77,12 @@
         android:text="@string/jl_kpg_sutoyo"
         android:textColor="@color/delivery_address"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView10" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView12"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="8dp"
@@ -266,7 +272,6 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_marginStart="12dp"
             android:layout_toEndOf="@+id/discount"
             android:fontFamily="@font/sora_semibold"
@@ -496,7 +501,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="179dp" />
+        app:layout_constraintGuide_end="182dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

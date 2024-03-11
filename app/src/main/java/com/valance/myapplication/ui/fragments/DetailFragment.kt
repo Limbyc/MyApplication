@@ -106,7 +106,7 @@ class DetailFragment : Fragment() {
 
     //like
     private fun updateUI() {
-        val coffeeId: Int? = arguments?.getInt("selectedCoffeeId")
+        val coffeeId: Int? = sharedViewModel.selectedCoffeeId
         coffeeId?.let {
             val itemId = it.toString()
             val isLiked = lickedSharedPreferences.isLiked(itemId)

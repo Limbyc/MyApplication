@@ -8,17 +8,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.valance.myapplication.R
 import com.valance.myapplication.databinding.LikeFragmentBinding
+import com.valance.myapplication.ui.ViewModel.SharedViewModel
 import com.valance.myapplication.ui.adapter.CoffeeAdapter
 import com.valance.myapplication.ui.data.CoffeeData
 
 class LikeFragment : Fragment() {
 
     private lateinit var binding: LikeFragmentBinding
+    private val sharedViewModel by activityViewModels<SharedViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,10 +47,8 @@ class LikeFragment : Fragment() {
             recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
             val adapter = CoffeeAdapter(likedCoffeeList) { clickedCoffee ->
-                val bundle = Bundle().apply {
-                    putInt("selectedCoffeeId", clickedCoffee.id)
-                }
-                findNavController().navigate(R.id.detailFragment, bundle)
+                sharedViewModel.selectedCoffeeId = clickedCoffee.id
+                findNavController().navigate(R.id.detailFragment)
             }
             recyclerView.adapter = adapter
         } else {
